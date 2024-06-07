@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlavioQR</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navbar {
+            background-color: #1877f2;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .toggle-dark-mode {
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            background-color: #ffffff;
+            color: #1877f2;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        .toggle-dark-mode:hover {
+            background-color: #e0e0e0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .left, .right, .description {
+            padding: 10px;
+        }
+
+        .left {
+            flex: 1;
+            max-width: 50%;
+        }
+
+        .right {
+            flex: 1;
+            max-width: 50%;
+        }
+
+        .carousel {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .carousel img {
+            width: 100%;
+            height: auto;
+            display: none;
+        }
+
+        .carousel img.active {
+            display: block;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .details h1 {
+            font-size: 24px;
+        }
+
+        .details .price {
+            font-size: 24px;
+            color: #28a745;
+        }
+
+        .buttons {
+            margin-top: 10px;
+        }
+
+        .buttons a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .buttons button {
+            margin-right: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .whatsapp-button {
+            background-color: #25d366;
+        }
+
+        .whatsapp-button:hover {
+            background-color: #1da851;
+        }
+
+        .call-button {
+            background-color: #ff9800;
+        }
+
+        .call-button:hover {
+            background-color: #e68900;
+        }
+
+        .maps-button {
+            background-color: #ea4335;
+        }
+
+        .maps-button:hover {
+            background-color: #d93025;
+        }
+
+        .description {
+            margin-top: 20px;
+            order: 3;
+            width: 100%;
+        }
+
+        .description h2 {
+            font-size: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .description p {
+            margin: 5px 0;
+        }
+
+        .caracteristics, .dealer-info {
+            margin-top: 20px;
+        }
+
+        .caracteristics h2, .dealer-info h2 {
+            font-size: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .caracteristics p, .dealer-info p {
+            margin: 5px 0;
+        }
+
+        .dark-mode {
+            background-color: #1E1E1E;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .navbar {
+            background-color: #1f1f1f;
+        }
+
+        .dark-mode .toggle-dark-mode {
+            background-color: #333333;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .toggle-dark-mode:hover {
+            background-color: #555555;
+        }
+
+        .dark-mode .carousel {
+            box-shadow: 0 4px 8px rgba(255,255,255,0.2);
+        }
+
+        .dark-mode .buttons button {
+            box-shadow: 0 4px 8px rgba(255,255,255,0.2);
+        }
+
+        .dark-mode .buttons button:hover {
+            box-shadow: 0 4px 8px rgba(255,255,255,0.4);
+        }
+
+        #qrcode {
+            width: 160px;
+            height: 160px;
+            margin-top: 15px;
+        }
+
+        .download-button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        .download-button:hover {
+            background-color: #0056b3;
+        }
+
+        .whatsapp-float-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+        }
+
+        .whatsapp-float-button:hover {
+            background-color: #1da851;
+        }
+
+        .whatsapp-float-button img {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+
+            .left, .right {
+                max-width: 100%;
+            }
+
+            .description {
+                order: 4;
+            }
+
+            .details h1 {
+                font-size: 20px;
+            }
+
+            .details .price {
+                font-size: 20px;
+            }
+
+            .buttons button {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+
+            .caracteristics h2, .dealer-info h2, .description h2 {
+                font-size: 18px;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs@0.0.2/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <h1>FlavioQR🚗</h1>
+        <button class="toggle-dark-mode" onclick="toggleDarkMode()">🌙</button>
+    </div>
+    <div class="container">
+        <div class="content">
+            <div class="left">
+                <div class="carousel">
+                    <img src="https://via.placeholder.com/600x400?text=FotoAutomovil+1" alt="Foto automóvil 1" class="active">
+                    <img src="https://via.placeholder.com/600x400?text=FotoAutomovil+2" alt="Foto automóvil 2">
+                    <img src="https://via.placeholder.com/600x400?text=FotoAutomovil+3" alt="Foto automóvil 3">
+                    <img src="https://via.placeholder.com/600x400?text=FotoAutomovil+4" alt="Foto automóvil 4">
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                </div>
+                <div class="description" id="description">
+                    <h2>Descripción del vehículo</h2>
+                    <p>Este Mercedes-Benz Clase C 2.0 C300 Coupe 245cv del año 2016 con 78.000 km está en excelentes condiciones. Ofrece una combinación perfecta de lujo, rendimiento y tecnología. Equipado con un motor potente y eficiente, transmisión automática y una elegante carrocería de color plata, este vehículo se destaca por su comodidad y sofisticación.</p>
+                    <p>El interior está diseñado con materiales de alta calidad, brindando una experiencia de conducción superior. Además, cuenta con características avanzadas de seguridad y asistencia al conductor, que garantizan la máxima protección y tranquilidad en cada viaje.</p>
+                    <p>Este automóvil es ideal para aquellos que buscan un coche de alta gama, con un diseño deportivo y un rendimiento excepcional. No pierdas la oportunidad de adquirir este increíble Mercedes-Benz.</p>
+                </div>
+            </div>
+            <div class="right">
+                <div class="details">
+                    <h1>Mercedes-Benz Clase C 2.0 C300 Coupe 245cv</h1>
+                    <p>2016 | 78.000 km</p>
+                    <p class="price">U$S 49.999</p>
+                    <div class="buttons">
+                        <a href="https://wa.me/5492254456383" target="_blank"><button class="whatsapp-button">WhatsApp</button></a>
+                        <!-- <button class="call-button">Llamar</button> -->
+                        <a href="https://maps.app.goo.gl/ybxJPSwR6vcZoKp18" target="_blank"><button class="maps-button">Google Maps</button></a>
+                    </div>
+                </div>
+                <div class="caracteristics">
+                    <h2>Características del vehículo</h2>
+                    <p><strong>Puertas:</strong> 2</p>
+                    <p><strong>Tipo de combustible:</strong> Nafta</p>
+                    <p><strong>Transmisión:</strong> Automática</p>
+                    <p><strong>Color:</strong> Plata</p>
+                    <p><strong>Estado:</strong> Usado</p>
+                </div>
+                <div class="dealer-info">
+                    <h2>Información de la concesionaria</h2>
+                    <p><strong>Nombre:</strong> Baviera Motors</p>
+                    <p><strong>Verificación:</strong> Con identidad verificada</p>
+                    <p><strong>Años en el mercado:</strong> 17 años</p>
+                    <p><strong>Vehículos disponibles:</strong> 20</p>
+                    <p><strong>Ubicación:</strong> Buenos Aires, Argentina</p>
+                </div>
+                <div id="qrcode"></div>
+                <a id="qrdl" class="download-button" hidden>Descargar QR</a>
+            </div>
+        </div>
+    </div>
+
+    <a href="https://wa.me/5492254456383" target="_blank" class="whatsapp-float-button">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+        Contactar
+    </a>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script>
+        let slideIndex = 0;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.querySelectorAll('.carousel img');
+            if (n >= slides.length) {slideIndex = 0}
+            if (n < 0) {slideIndex = slides.length - 1}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+            }
+            slides[slideIndex].classList.add('active');
+        }
+
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            const toggleButton = document.querySelector('.toggle-dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                toggleButton.textContent = '☀️';
+            } else {
+                toggleButton.textContent = '🌙';
+            }
+        }
+
+        // Mover la descripción al final en móviles
+        function moveDescription() {
+            const description = document.getElementById('description');
+            const content = document.querySelector('.content');
+            if (window.innerWidth <= 768) {
+                content.appendChild(description);
+            } else {
+                const leftColumn = document.querySelector('.left');
+                leftColumn.appendChild(description);
+            }
+        }
+
+        window.addEventListener('resize', moveDescription);
+        window.addEventListener('DOMContentLoaded', moveDescription);
+
+        // Función para generar el QR y permitir la descarga
+        function makeQR(url, filename) {
+            var qrcode = new QRCode("qrcode", {
+                text: url,
+                width: 128,
+                height: 128,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+            qrcode.makeCode(url);
+
+            setTimeout(() => {
+                let qelem = document.querySelector('#qrcode img');
+                let dlink = document.querySelector('#qrdl');
+                let qr = qelem.getAttribute('src');
+                dlink.setAttribute('href', qr);
+                dlink.setAttribute('download', filename);
+                dlink.removeAttribute('hidden');
+            }, 500);
+        }
+
+        // Generar QR Code en la carga inicial
+        document.addEventListener('DOMContentLoaded', () => {
+            makeQR(window.location.href, 'qr-code.png');
+        });
+
+    </script>
+</body>
+</html>
