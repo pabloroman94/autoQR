@@ -1,449 +1,244 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Listings</title>
+    <title>FlavioQR</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            background-color: #f4f4f4;
-            color: #333;
         }
-
         header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            background-color: #0053F9;
-            padding: 10px 20px;
-        }
-
-        header input {
-            width: 60%;
+            justify-content: space-between;
+            background-color: #007bff;
             padding: 10px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-        }
-
-        header .logo {
-            font-size: 24px;
             color: #fff;
-            font-weight: bold;
         }
-
-        header .toggle-dark-mode {
-            background-color: #fff;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        main {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        aside {
-            width: 20%;
-            padding: 20px;
-            background-color: #f4f4f4;
-            margin-right: 20px;
-        }
-
-        .toggle-button {
-            background-color: #000;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 10px;
-            display: block;
-            text-align: center;
-        }
-
-        .toggle-button.hidden {
-            display: none;
-        }
-
-        aside ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        aside ul li {
-            padding: 10px 0;
-            cursor: pointer;
-            position: relative;
-        }
-
-        aside ul li span {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: bold;
-        }
-
-        aside ul li .filter-content {
-            display: none;
-            padding-top: 10px;
-        }
-
-        .filter-content button {
-            padding: 5px 10px;
-            margin: 5px;
-            border: 1px solid #0053F9;
-            border-radius: 5px;
-            background-color: #0053F9;
-            color: #fff;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .filter-content .search-box {
+        .logo {
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            font-size: 1.5rem;
         }
-
-        .filter-content .search-box input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px 0 0 5px;
-        }
-
-        .filter-content .search-box button {
-            padding: 8px 12px;
-            border: 1px solid #ccc;
-            border-left: none;
-            background-color: #f4f4f4;
-            cursor: pointer;
-            border-radius: 0 5px 5px 0;
-        }
-
-        .filter-content .brand-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .filter-content .brand-list li {
-            display: flex;
-            align-items: center;
-            padding: 5px 0;
-        }
-
-        .filter-content .brand-list li img {
-            width: 24px;
-            height: auto;
+        .logo img {
             margin-right: 10px;
         }
-
-        .filter-content .range-input {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .filter-content .range-input input {
-            width: 45%;
-            padding: 5px;
-            border: 1px solid #ccc;
+        input[type="text"] {
+            flex: 1;
+            padding: 8px;
             border-radius: 5px;
-            text-align: right;
+            border: none;
+            margin: 0 10px;
+            max-width: 300px;
         }
-
-        .filter-content .range-slider {
-            width: 100%;
-            margin-top: 10px;
+        .toggle-dark-mode {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #fff;
         }
-
-        .filter-content .type-buttons,
-        .filter-content .transmission-buttons,
-        .filter-content .status-buttons,
-        .filter-content .color-buttons,
-        .filter-content .passenger-buttons,
-        .filter-content .fuel-buttons,
-        .filter-content .traction-buttons {
+        main {
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .filter-content .type-buttons button,
-        .filter-content .transmission-buttons button,
-        .filter-content .status-buttons button,
-        .filter-content .color-buttons button,
-        .filter-content .passenger-buttons button,
-        .filter-content .fuel-buttons button,
-        .filter-content .traction-buttons button {
-            border: 1px solid #ccc;
-            background-color: #fff;
-            color: #333;
             padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100px;
         }
-
-        .filter-content .type-buttons button img,
-        .filter-content .transmission-buttons button img,
-        .filter-content .status-buttons button img,
-        .filter-content .color-buttons button img,
-        .filter-content .passenger-buttons button img,
-        .filter-content .fuel-buttons button img,
-        .filter-content .traction-buttons button img {
-            margin-right: 5px;
+        aside {
+            width: 250px;
+            background-color: #f4f4f4;
+            padding: 10px;
+            display: block;
         }
-
-        section {
-            width: 70%;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .results-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .results-header button {
-            padding: 8px 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .results-header button:hover {
-            background-color: #e6e6e6;
-        }
-
-        .results-header span {
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .sort-dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .sort-dropdown-content {
+        .toggle-button {
             display: none;
-            position: absolute;
-            background-color: #fff;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            z-index: 1;
-            min-width: 160px;
-            border-radius: 5px;
-            overflow: hidden;
+            margin-bottom: 10px;
         }
-
-        .sort-dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .sort-dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
-
-        .sort-dropdown:hover .sort-dropdown-content {
-            display: block;
-        }
-
         .car-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 10px;
+            padding: 10px;
         }
-
         .car-card {
+            display: block;
             background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             text-decoration: none;
             color: inherit;
         }
-
         .car-card img {
             width: 100%;
-            height: auto;
+            height: 150px;
+            object-fit: cover;
         }
-
         .car-card-content {
-            padding: 15px;
+            padding: 10px;
         }
-
-        .car-card h3 {
+        .car-card-content h3 {
+            margin: 0;
             font-size: 18px;
-            margin: 10px 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
-
-        .car-card p {
-            font-size: 16px;
+        .car-card-content p {
             margin: 5px 0;
+            color: #555;
         }
-
-        .car-card .price {
+        .car-card-content .price {
+            color: #007bff;
             font-size: 20px;
             font-weight: bold;
-            color: #333;
         }
-
-        footer {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
+        .results-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
         }
-
-        footer button {
-            background-color: #000;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
+        .results-header button {
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            background-color: #fff;
             cursor: pointer;
         }
-
+        .results-header span {
+            font-size: 16px;
+        }
+        .sort-dropdown {
+            position: relative;
+        }
+        .sort-dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+        .sort-dropdown-content a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+        }
+        .sort-dropdown-content a:hover {
+            background-color: #f4f4f4;
+        }
+        .sort-dropdown:hover .sort-dropdown-content {
+            display: block;
+        }
+        footer {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        footer button {
+            background-color: #fff;
+            color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
         @media (max-width: 768px) {
-            main {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            aside {
-                width: 100%;
-                margin-right: 0;
-                padding: 10px;
-                display: none;
-            }
-
-            section {
-                width: 100%;
-                padding: 10px;
-            }
-
-            .results-header {
+            header {
                 flex-direction: column;
                 align-items: flex-start;
             }
-
-            .car-cards {
-                grid-template-columns: 1fr;
+            input[type="text"] {
+                margin: 10px 0;
+                width: 100%;
             }
-
-            #show-filters {
+            aside {
+                display: none;
+            }
+            .toggle-button {
                 display: block;
             }
         }
-
-        @media (max-width: 480px) {
-            header input {
-                font-size: 14px;
-                padding: 8px;
+        @media (max-width: 600px) {
+            header {
+                flex-direction: row;
+                flex-wrap: wrap;
             }
-
-            .toggle-button {
-                padding: 8px 15px;
+            .logo {
+                flex: 1 1 100%;
+                text-align: center;
             }
-
+            input[type="text"] {
+                flex: 1 1 100%;
+                margin: 10px 0;
+            }
+            .toggle-dark-mode {
+                flex: 1 1 100%;
+                text-align: center;
+                margin-top: 10px;
+            }
             .car-card-content h3 {
                 font-size: 16px;
             }
-
             .car-card-content p {
                 font-size: 14px;
             }
-
-            .car-card .price {
+            .car-card-content .price {
                 font-size: 18px;
             }
         }
-
         /* Dark mode styles */
         .dark-mode {
             background-color: #121212;
             color: #e0e0e0;
         }
-
         .dark-mode .navbar {
             background-color: #1f1f1f;
         }
-
         .dark-mode .toggle-dark-mode {
             background-color: #333333;
             color: #e0e0e0;
         }
-
         .dark-mode .toggle-dark-mode:hover {
             background-color: #555555;
         }
-
         .dark-mode aside {
             background-color: #1f1f1f;
         }
-
         .dark-mode .results-header button,
         .dark-mode .results-header span,
         .dark-mode .sort-dropdown-content a {
             color: #e0e0e0;
         }
-
         .dark-mode .results-header button {
             background-color: #333333;
             border-color: #555555;
         }
-
         .dark-mode .results-header button:hover {
             background-color: #555555;
         }
-
         .dark-mode .sort-dropdown-content {
             background-color: #333333;
         }
-
         .dark-mode .sort-dropdown-content a:hover {
             background-color: #555555;
         }
-
         .dark-mode .car-card {
             background-color: #1f1f1f;
             box-shadow: 0 4px 8px rgba(255,255,255,0.2);
         }
-
         .dark-mode .car-card-content {
             color: #e0e0e0;
         }
-
         .dark-mode .car-card .price {
             color: #ffffff;
         }
-
         .dark-mode footer button {
             background-color: #333333;
             color: #e0e0e0;
         }
-
         .dark-mode footer button:hover {
             background-color: #555555;
         }
@@ -552,25 +347,25 @@
                 </li>
                 <li>
                     <span>Tipo <span>&#9660;</span></span>
-                    <div class="filter-content type-buttons">
-                        <button><img src="https://via.placeholder.com/24?text=H" alt="Hatchback"> Hatchback</button>
-                        <button><img src="https://via.placeholder.com/24?text=S" alt="Suv"> Suv</button>
-                        <button><img src="https://via.placeholder.com/24?text=S" alt="Sedan"> Sedan</button>
-                        <button><img src="https://via.placeholder.com/24?text=P" alt="Pickup"> Pickup</button>
-                        <button><img src="https://via.placeholder.com/24?text=V" alt="Van"> Van</button>
-                        <button><img src="https://via.placeholder.com/24?text=M" alt="Minivan"> Minivan</button>
+                    <div class="filter-content">
+                        <button>Hatchback</button>
+                        <button>Suv</button>
+                        <button>Sedan</button>
+                        <button>Pickup</button>
+                        <button>Van</button>
+                        <button>Minivan</button>
                     </div>
                 </li>
                 <li>
                     <span>Transmisión <span>&#9660;</span></span>
-                    <div class="filter-content transmission-buttons">
+                    <div class="filter-content">
                         <button>Manual</button>
                         <button>Automática</button>
                     </div>
                 </li>
                 <li>
                     <span>Estatus del auto <span>&#9660;</span></span>
-                    <div class="filter-content status-buttons">
+                    <div class="filter-content">
                         <button>Disponible</button>
                         <button>Reservado</button>
                     </div>
@@ -616,7 +411,7 @@
                 </li>
                 <li>
                     <span>Combustible <span>&#9660;</span></span>
-                    <div class="filter-content fuel-buttons">
+                    <div class=" filter-content fuel-buttons">
                         <button>Nafta</button>
                         <button>Diesel</button>
                     </div>
@@ -680,7 +475,7 @@
                 <a href="index2.html" class="car-card">
                     <img src="https://via.placeholder.com/300x200.png?text=Chevrolet+Cruze+II" alt="Chevrolet Cruze II">
                     <div class="car-card-content">
-                        <h3>Chevrolet • Cruze II</h3>
+                        <h3>Chevrolet Cruze II</h3>
                         <p>2022 • 36.447 km • 1.4 RS AT • Automática</p>
                         <p class="price">$25.790.000</p>
                         <p>Buenos Aires</p>
@@ -689,7 +484,7 @@
                 <a href="index2.html" class="car-card">
                     <img src="https://via.placeholder.com/300x200.png?text=Nissan+Note" alt="Nissan Note">
                     <div class="car-card-content">
-                        <h3>Nissan • Note</h3>
+                        <h3>Nissan Note</h3>
                         <p>2016 • 88.580 km • 1.6 SENSE MT • Manual</p>
                         <p class="price">$11.590.000</p>
                         <p>Buenos Aires</p>
@@ -698,13 +493,12 @@
                 <a href="index2.html" class="car-card">
                     <img src="https://via.placeholder.com/300x200.png?text=Peugeot+208" alt="Peugeot 208">
                     <div class="car-card-content">
-                        <h3>Peugeot • 208</h3>
+                        <h3>Peugeot 208</h3>
                         <p>2023 • 3.875 km • 1.6 ACTIVE PACK TIPT</p>
                         <p class="price">$20.970.000</p>
                         <p>Buenos Aires</p>
                     </div>
                 </a>
-                <!-- Add more car-cards as needed -->
             </div>
         </section>
     </main>
@@ -723,32 +517,18 @@
             }
         }
 
-        document.getElementById('hide-filters').addEventListener('click', function() {
-            const filterSection = document.getElementById('filter-section');
-            const showFiltersButton = document.getElementById('show-filters');
-            filterSection.style.display = 'none';
-            showFiltersButton.classList.remove('hidden');
-        });
+        const filterSection = document.getElementById('filter-section');
+        const showFiltersButton = document.getElementById('show-filters');
+        const hideFiltersButton = document.getElementById('hide-filters');
 
-        document.getElementById('show-filters').addEventListener('click', function() {
-            const filterSection = document.getElementById('filter-section');
+        showFiltersButton.addEventListener('click', () => {
             filterSection.style.display = 'block';
-            this.classList.add('hidden');
+            showFiltersButton.style.display = 'none';
         });
 
-        document.querySelectorAll('aside ul li').forEach(function(filterItem) {
-            filterItem.addEventListener('click', function() {
-                const filterContent = this.querySelector('.filter-content');
-                const arrow = this.querySelector('span span');
-
-                if (filterContent.style.display === 'block') {
-                    filterContent.style.display = 'none';
-                    arrow.innerHTML = '&#9660;';
-                } else {
-                    filterContent.style.display = 'block';
-                    arrow.innerHTML = '&#9650;';
-                }
-            });
+        hideFiltersButton.addEventListener('click', () => {
+            filterSection.style.display = 'none';
+            showFiltersButton.style.display = 'block';
         });
     </script>
 </body>

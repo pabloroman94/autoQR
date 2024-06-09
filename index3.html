@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alta de Publicación de Autos</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navbar {
+            background-color: #1877f2;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .toggle-dark-mode {
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            background-color: #ffffff;
+            color: #1877f2;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        .toggle-dark-mode:hover {
+            background-color: #e0e0e0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input, select, textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .dark-mode {
+            background-color: #1E1E1E;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .navbar {
+            background-color: #1f1f1f;
+        }
+
+        .dark-mode .toggle-dark-mode {
+            background-color: #333333;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .toggle-dark-mode:hover {
+            background-color: #555555;
+        }
+
+        .dark-mode .container {
+            background-color: #2c2c2c;
+        }
+
+        .dark-mode input, .dark-mode select, .dark-mode textarea {
+            background-color: #3c3c3c;
+            color: #e0e0e0;
+            border-color: #555555;
+        }
+
+        .dark-mode button {
+            background-color: #444444;
+        }
+
+        .dark-mode button:hover {
+            background-color: #666666;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Alta de Publicación de Autos</h1>
+        <button class="toggle-dark-mode" onclick="toggleDarkMode()">🌙</button>
+    </div>
+    <div class="container">
+        <h2>Formulario de Publicación</h2>
+        <form id="carForm">
+            <div class="form-group">
+                <label for="marca">Marca</label>
+                <select id="marca" name="marca" required>
+                    <option value="">Selecciona una marca</option>
+                    <option value="alfa_romeo">Alfa Romeo</option>
+                    <option value="audi">Audi</option>
+                    <option value="bmw">BMW</option>
+                    <option value="chevrolet">Chevrolet</option>
+                    <option value="fiat">Fiat</option>
+                    <option value="ford">Ford</option>
+                    <option value="honda">Honda</option>
+                    <option value="hyundai">Hyundai</option>
+                    <option value="jeep">Jeep</option>
+                    <option value="kia">Kia</option>
+                    <option value="mercedes_benz">Mercedes Benz</option>
+                    <option value="nissan">Nissan</option>
+                    <option value="peugeot">Peugeot</option>
+                    <option value="renault">Renault</option>
+                    <option value="toyota">Toyota</option>
+                    <option value="volkswagen">Volkswagen</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="modelo">Modelo</label>
+                <input type="text" id="modelo" name="modelo" required>
+            </div>
+            <div class="form-group">
+                <label for="anio">Año</label>
+                <input type="number" id="anio" name="anio" min="1900" max="2024" required>
+            </div>
+            <div class="form-group">
+                <label for="precio">Precio</label>
+                <input type="number" id="precio" name="precio" required>
+            </div>
+            <div class="form-group">
+                <label for="km">Kilometraje</label>
+                <input type="number" id="km" name="km" required>
+            </div>
+            <div class="form-group">
+                <label for="combustible">Combustible</label>
+                <select id="combustible" name="combustible" required>
+                    <option value="">Selecciona un tipo de combustible</option>
+                    <option value="nafta">Nafta</option>
+                    <option value="diesel">Diesel</option>
+                    <option value="electrico">Eléctrico</option>
+                    <option value="hibrido">Híbrido</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="transmision">Transmisión</label>
+                <select id="transmision" name="transmision" required>
+                    <option value="">Selecciona un tipo de transmisión</option>
+                    <option value="manual">Manual</option>
+                    <option value="automatica">Automática</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="color">Color</label>
+                <input type="text" id="color" name="color" required>
+            </div>
+            <div class="form-group">
+                <label for="puertas">Puertas</label>
+                <input type="number" id="puertas" name="puertas" required>
+            </div>
+            <div class="form-group">
+                <label for="motor">Motor</label>
+                <input type="text" id="motor" name="motor" required>
+            </div>
+            <div class="form-group">
+                <label for="acepta_permuta">Acepta permuta</label>
+                <select id="acepta_permuta" name="acepta_permuta" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" name="descripcion" rows="5" required></textarea>
+            </div>
+            
+            <!-- Sección de características adicionales -->
+            <div class="form-group">
+                <h3>Características</h3>
+                <label for="aire_acondicionado">Aire acondicionado</label>
+                <select id="aire_acondicionado" name="aire_acondicionado" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="alarma_luces">Alarma de luces encendidas</label>
+                <select id="alarma_luces" name="alarma_luces" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="computadora_abordo">Computadora de abordo</label>
+                <select id="computadora_abordo" name="computadora_abordo" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="cristales_electricos">Cristales eléctricos</label>
+                <select id="cristales_electricos" name="cristales_electricos" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="apertura_remota_baul">Apertura remota de baúl</label>
+                <select id="apertura_remota_baul" name="apertura_remota_baul" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="comando_remoto_radio">Comando remoto para radio en el volante</label>
+                <select id="comando_remoto_radio" name="comando_remoto_radio" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="porta_vasos">Porta vasos</label>
+                <select id="porta_vasos" name="porta_vasos" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="cierre_automatico_vidrios">Cierre automático de vidrios</label>
+                <select id="cierre_automatico_vidrios" name="cierre_automatico_vidrios" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="frenos_abs">Frenos ABS</label>
+                <select id="frenos_abs" name="frenos_abs" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="airbag_conductor">Airbag conductor</label>
+                <select id="airbag_conductor" name="airbag_conductor" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="airbag_pasajero">Airbag para conductor y pasajero</label>
+                <select id="airbag_pasajero" name="airbag_pasajero" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="faros_antinieblas">Faros antinieblas traseros</label>
+                <select id="faros_antinieblas" name="faros_antinieblas" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="desempañador_trasero">Desempañador trasero</label>
+                <select id="desempañador_trasero" name="desempañador_trasero" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="tercera_luz_freno">Tercera luz de freno led</label>
+                <select id="tercera_luz_freno" name="tercera_luz_freno" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="cierre_centralizado">Cierre centralizado de puertas</label>
+                <select id="cierre_centralizado" name="cierre_centralizado" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="llantas_aleacion">Llantas de aleación</label>
+                <select id="llantas_aleacion" name="llantas_aleacion" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="limpia_lava_luneta">Limpia/lava luneta</label>
+                <select id="limpia_lava_luneta" name="limpia_lava_luneta" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="am_fm">AM/FM</label>
+                <select id="am_fm" name="am_fm" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="entrada_auxiliar">Entrada auxiliar</label>
+                <select id="entrada_auxiliar" name="entrada_auxiliar" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="bluetooth">Bluetooth</label>
+                <select id="bluetooth" name="bluetooth" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="cd">CD</label>
+                <select id="cd" name="cd" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="mp3">Reproductor de MP3</label>
+                <select id="mp3" name="mp3" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="usb">Entrada USB</label>
+                <select id="usb" name="usb" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="direccion">Dirección</label>
+                <select id="direccion" name="direccion" required>
+                    <option value="hidraulica">Hidráulica</option>
+                    <option value="electrica">Eléctrica</option>
+                </select>
+
+                <label for="alarma">Alarma</label>
+                <select id="alarma" name="alarma" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="control_traccion">Control de tracción</label>
+                <select id="control_traccion" name="control_traccion" required>
+                    <option value="delantera">Delantera</option>
+                    <option value="trasera">Trasera</option>
+                    <option value="4x4">4x4</option>
+                </select>
+
+                <label for="bateria_tipo">Tipo de batería</label>
+                <input type="text" id="bateria_tipo" name="bateria_tipo" required>
+
+                <label for="bateria_capacidad">Capacidad de la batería (Ah)</label>
+                <input type="number" id="bateria_capacidad" name="bateria_capacidad" required>
+
+                <label for="bateria_tiempo_carga">Tiempo de carga de la batería (horas)</label>
+                <input type="number" id="bateria_tiempo_carga" name="bateria_tiempo_carga" required>
+
+                <label for="bateria_autonomia">Autonomía de la batería (km)</label>
+                <input type="number" id="bateria_autonomia" name="bateria_autonomia" required>
+
+                <label for="capacidad_personas">Capacidad de personas</label>
+                <input type="number" id="capacidad_personas" name="capacidad_personas" required>
+
+                <label for="potencia">Potencia (hp)</label>
+                <input type="number" id="potencia" name="potencia" required>
+
+                <label for="largo_ancho_alto">Largo x Ancho x Alto (mm)</label>
+                <input type="text" id="largo_ancho_alto" name="largo_ancho_alto" required>
+
+                <label for="distancia_ejes">Distancia entre ejes (mm)</label>
+                <input type="number" id="distancia_ejes" name="distancia_ejes" required>
+
+                <label for="capacidad_tanque">Capacidad del tanque (L)</label>
+                <input type="number" id="capacidad_tanque" name="capacidad_tanque" required>
+
+                <label for="valvulas_cilindro">Válvulas por cilindro</label>
+                <input type="number" id="valvulas_cilindro" name="valvulas_cilindro" required>
+            </div>
+
+            <button type="submit">Publicar</button>
+        </form>
+    </div>
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            const toggleButton = document.querySelector('.toggle-dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                toggleButton.textContent = '☀️';
+            } else {
+                toggleButton.textContent = '🌙';
+            }
+        }
+    </script>
+</body>
+</html>

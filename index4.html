@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tablero de Publicaciones</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navbar {
+            background-color: #1877f2;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .toggle-dark-mode {
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            background-color: #ffffff;
+            color: #1877f2;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        .toggle-dark-mode:hover {
+            background-color: #e0e0e0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th, .table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f4f4f4;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .button {
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button.alta {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .button.baja {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .button.modificacion {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .button:hover {
+            opacity: 0.8;
+        }
+
+        .dark-mode {
+            background-color: #1E1E1E;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .navbar {
+            background-color: #1f1f1f;
+        }
+
+        .dark-mode .toggle-dark-mode {
+            background-color: #333333;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .toggle-dark-mode:hover {
+            background-color: #555555;
+        }
+
+        .dark-mode .container {
+            background-color: #2c2c2c;
+        }
+
+        .dark-mode .table th, .dark-mode .table td {
+            border-color: #555555;
+        }
+
+        .dark-mode .table th {
+            background-color: #3c3c3c;
+        }
+
+        .dark-mode .button {
+            color: white;
+        }
+
+        .dark-mode .button.alta {
+            background-color: #218838;
+        }
+
+        .dark-mode .button.baja {
+            background-color: #c82333;
+        }
+
+        .dark-mode .button.modificacion {
+            background-color: #e0a800;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Tablero de Publicaciones</h1>
+        <button class="toggle-dark-mode" onclick="toggleDarkMode()">🌙</button>
+    </div>
+    <div class="container">
+        <h2>Listado de Publicaciones</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Año</th>
+                    <th>Precio</th>
+                    <th>Kilometraje</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Ejemplo de publicaciones de prueba -->
+                <tr>
+                    <td>1</td>
+                    <td>Renault</td>
+                    <td>Sandero</td>
+                    <td>2015</td>
+                    <td>$350,000</td>
+                    <td>63,000 km</td>
+                    <td>
+                        <div class="button-group">
+                            <button class="button alta" onclick="altaPublicacion(1)">Alta</button>
+                            <button class="button baja" onclick="bajaPublicacion(1)">Baja</button>
+                            <button class="button modificacion" onclick="modificarPublicacion(1)">Modificación</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Ford</td>
+                    <td>Focus</td>
+                    <td>2018</td>
+                    <td>$450,000</td>
+                    <td>45,000 km</td>
+                    <td>
+                        <div class="button-group">
+                            <button class="button alta" onclick="altaPublicacion(2)">Alta</button>
+                            <button class="button baja" onclick="bajaPublicacion(2)">Baja</button>
+                            <button class="button modificacion" onclick="modificarPublicacion(2)">Modificación</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Chevrolet</td>
+                    <td>Cruze</td>
+                    <td>2020</td>
+                    <td>$550,000</td>
+                    <td>20,000 km</td>
+                    <td>
+                        <div class="button-group">
+                            <button class="button alta" onclick="altaPublicacion(3)">Alta</button>
+                            <button class="button baja" onclick="bajaPublicacion(3)">Baja</button>
+                            <button class="button modificacion" onclick="modificarPublicacion(3)">Modificación</button>
+                        </div>
+                    </td>
+                </tr>
+                <!-- Agregar más filas según sea necesario -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            const toggleButton = document.querySelector('.toggle-dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                toggleButton.textContent = '☀️';
+            } else {
+                toggleButton.textContent = '🌙';
+            }
+        }
+
+        function altaPublicacion(id) {
+            // Lógica para dar de alta una publicación
+            alert('Alta de la publicación con ID: ' + id);
+        }
+
+        function bajaPublicacion(id) {
+            // Lógica para dar de baja una publicación
+            alert('Baja de la publicación con ID: ' + id);
+        }
+
+        function modificarPublicacion(id) {
+            // Lógica para modificar una publicación
+            alert('Modificación de la publicación con ID: ' + id);
+        }
+    </script>
+</body>
+</html>
