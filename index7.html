@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABM Sucursales</title>
+    <style>
+        :root {
+            --body-bg: #FFFFFF;
+            --body-color: #1E1E1E;
+            --container-bg: #F4F4F4;
+            --h1-bg: #00A67E;
+            --h1-color: white;
+            --label-color: #1E1E1E;
+            --input-bg: #FFFFFF;
+            --input-color: #1E1E1E;
+            --input-border: #CCC;
+            --button-bg: #00A67E;
+            --button-hover-bg: #007B63;
+            --table-header-bg: #E0E0E0;
+            --table-row-bg: #F9F9F9;
+            --table-row-hover-bg: #D3D3D3;
+        }
+
+        .dark-mode {
+            --body-bg: #202123;
+            --body-color: #D9D9E3;
+            --container-bg: #2C2C2E;
+            --h1-bg: #00A67E;
+            --h1-color: white;
+            --label-color: #D9D9E3;
+            --input-bg: #3A3A3C;
+            --input-color: #D9D9E3;
+            --input-border: #555;
+            --button-bg: #00A67E;
+            --button-hover-bg: #007B63;
+            --table-header-bg: #444;
+            --table-row-bg: #333;
+            --table-row-hover-bg: #555;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--body-bg);
+            color: var(--body-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        h1 {
+            text-align: center;
+            color: var(--h1-color);
+            background-color: var(--h1-bg);
+            padding: 20px 0;
+            margin: 0;
+            border-radius: 8px 8px 0 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        h2 {
+            text-align: center;
+            color: var(--label-color);
+            padding: 20px 0;
+            margin: 0;
+            transition: color 0.3s;
+        }
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: var(--container-bg);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+        .button, .toggle-button {
+            display: inline-block;
+            background-color: var(--button-bg);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .button:hover, .toggle-button:hover {
+            background-color: var(--button-hover-bg);
+        }
+        .toggle-button-container {
+            text-align: right;
+            padding: 10px;
+            background-color: var(--body-bg);
+            transition: background-color 0.3s;
+        }
+        .branch-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .branch-table th, .branch-table td {
+            border: 1px solid var(--input-border);
+            padding: 12px 15px;
+            text-align: left;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .branch-table th {
+            background-color: var(--table-header-bg);
+            color: var(--label-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .branch-table tr {
+            background-color: var(--table-row-bg);
+        }
+        .branch-table tr:nth-child(even) {
+            background-color: var(--table-row-bg);
+        }
+        .branch-table tr:hover {
+            background-color: var(--table-row-hover-bg);
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .action-button {
+            background-color: #008CBA;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        .action-button.modify {
+            background-color: #ffa500;
+        }
+        .action-button.delete {
+            background-color: #f44336;
+        }
+        .action-button.vehicles {
+            background-color: #4CAF50;
+        }
+        .action-button:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .toggle-button-container {
+                text-align: center;
+            }
+
+            .branch-table th, .branch-table td {
+                padding: 8px 10px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .action-button {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1, h2 {
+                font-size: 1.2em;
+            }
+
+            .branch-table th, .branch-table td {
+                padding: 5px 8px;
+                font-size: 0.9em;
+            }
+
+            .button, .toggle-button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="toggle-button-container">
+        <button class="toggle-button" onclick="toggleDarkMode()">Modo Oscuro</button>
+    </div>
+    <div class="container">
+        <h2>Gestión de Sucursales</h2>
+        <button class="button" onclick="createBranch()">Crear Nueva Sucursal</button>
+        <table class="branch-table">
+            <thead>
+                <tr>
+                    <th>Nombre de la Sucursal</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="branchTableBody">
+                <!-- Las filas de sucursales se agregarán aquí -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function createBranch() {
+            const branchName = prompt("Ingrese el nombre de la nueva sucursal:");
+            if (branchName) {
+                addBranchToTable(branchName);
+            }
+            window.location.href = 'index6.html';
+        }
+
+        function modifyBranch(row, oldName) {
+            const newName = prompt("Ingrese el nuevo nombre de la sucursal:", oldName);
+            if (newName) {
+                row.cells[0].textContent = newName;
+            }
+        }
+
+        function deleteBranch(row) {
+            if (confirm("¿Está seguro de que desea eliminar esta sucursal?")) {
+                row.remove();
+            }
+        }
+
+        function manageVehicles() {
+            window.location.href = 'index4.html';
+        }
+
+        function addBranchToTable(branchName) {
+            const tableBody = document.getElementById('branchTableBody');
+            const row = document.createElement('tr');
+
+            const nameCell = document.createElement('td');
+            nameCell.textContent = branchName;
+
+            const actionsCell = document.createElement('td');
+            actionsCell.className = 'action-buttons';
+
+            const modifyButton = document.createElement('button');
+            modifyButton.textContent = 'Modificar';
+            modifyButton.className = 'action-button modify';
+            modifyButton.onclick = function() { modifyBranch(row, branchName); };
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Eliminar';
+            deleteButton.className = 'action-button delete';
+            deleteButton.onclick = function() { deleteBranch(row); };
+
+            const vehiclesButton = document.createElement('button');
+            vehiclesButton.textContent = 'Vehículos';
+            vehiclesButton.className = 'action-button vehicles';
+            vehiclesButton.onclick = manageVehicles;
+
+            actionsCell.appendChild(modifyButton);
+            actionsCell.appendChild(deleteButton);
+            actionsCell.appendChild(vehiclesButton);
+
+            row.appendChild(nameCell);
+            row.appendChild(actionsCell);
+
+            tableBody.appendChild(row);
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            document.documentElement.classList.toggle('dark-mode');
+        }
+
+        // Agregar sucursales de prueba
+        const initialBranches = ["Sucursal Centro", "Sucursal Norte", "Sucursal Sur"];
+        initialBranches.forEach(addBranchToTable);
+    </script>
+</body>
+</html>

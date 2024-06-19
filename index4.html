@@ -90,11 +90,6 @@
             transition: background-color 0.3s ease;
         }
 
-        .button.alta {
-            background-color: #28a745;
-            color: white;
-        }
-
         .button.baja {
             background-color: #dc3545;
             color: white;
@@ -143,16 +138,36 @@
             color: white;
         }
 
-        .dark-mode .button.alta {
-            background-color: #218838;
-        }
-
         .dark-mode .button.baja {
             background-color: #c82333;
         }
 
         .dark-mode .button.modificacion {
             background-color: #e0a800;
+        }
+
+        .button-crear {
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-crear:hover {
+            background-color: #0056b3;
+        }
+
+        .dark-mode .button-crear {
+            background-color: #0056b3;
+        }
+
+        .dark-mode .button-crear:hover {
+            background-color: #004085;
         }
     </style>
 </head>
@@ -162,6 +177,7 @@
         <button class="toggle-dark-mode" onclick="toggleDarkMode()">🌙</button>
     </div>
     <div class="container">
+        <button class="button-crear" onclick="crearPublicacion()">Crear Nueva Publicación</button>
         <h2>Listado de Publicaciones</h2>
         <table class="table">
             <thead>
@@ -186,7 +202,6 @@
                     <td>63,000 km</td>
                     <td>
                         <div class="button-group">
-                            <button class="button alta" onclick="altaPublicacion(1)">Alta</button>
                             <button class="button baja" onclick="bajaPublicacion(1)">Baja</button>
                             <button class="button modificacion" onclick="modificarPublicacion(1)">Modificación</button>
                         </div>
@@ -201,7 +216,6 @@
                     <td>45,000 km</td>
                     <td>
                         <div class="button-group">
-                            <button class="button alta" onclick="altaPublicacion(2)">Alta</button>
                             <button class="button baja" onclick="bajaPublicacion(2)">Baja</button>
                             <button class="button modificacion" onclick="modificarPublicacion(2)">Modificación</button>
                         </div>
@@ -216,7 +230,6 @@
                     <td>20,000 km</td>
                     <td>
                         <div class="button-group">
-                            <button class="button alta" onclick="altaPublicacion(3)">Alta</button>
                             <button class="button baja" onclick="bajaPublicacion(3)">Baja</button>
                             <button class="button modificacion" onclick="modificarPublicacion(3)">Modificación</button>
                         </div>
@@ -238,9 +251,8 @@
             }
         }
 
-        function altaPublicacion(id) {
-            // Lógica para dar de alta una publicación
-            alert('Alta de la publicación con ID: ' + id);
+        function crearPublicacion() {
+            window.location.href = 'index3.html';
         }
 
         function bajaPublicacion(id) {

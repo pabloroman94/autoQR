@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concesionarias de Autos en Argentina</title>
+    <style>
+        body {
+            font-family: Hind, sans-serif !important;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #000;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+        .header input {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            color: #888;
+            margin-right: 10px;
+        }
+        .header input::placeholder {
+            color: #aaa;
+            font-style: italic;
+        }
+        .header button {
+            padding: 8px;
+            background-color: #10a37f;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+        .header button img {
+            width: 16px;
+            height: 16px;
+        }
+        .login-button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        .login-button:hover {
+            background-color: #0056b3;
+        }
+        .carousel {
+            width: 100%;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        .carousel-images {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+        .carousel img {
+            width: calc(100% / 3);
+            height: 100%;
+            object-fit: cover;
+        }
+        .carousel-buttons {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .carousel-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+        .highlight-cards {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            transition: background-color 0.3s;
+        }
+        .highlight-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 20px;
+            width: 45%;
+            transition: background-color 0.3s;
+        }
+        .highlight-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+            transition: color 0.3s;
+        }
+        .highlight-card p {
+            font-size: 16px;
+            color: #666;
+            transition: color 0.3s;
+        }
+        .main {
+            padding: 20px 0;
+        }
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            justify-items: center;
+        }
+        .card {
+            width: 200px;
+            height: 150px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border: 1px solid #cbd6dc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .card img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+        .dark-mode .header {
+            background-color: #444;
+        }
+        .dark-mode .header input {
+            background-color: #555;
+            border-color: #666;
+            color: #ddd;
+        }
+        .dark-mode .header input::placeholder {
+            color: #aaa;
+        }
+        .dark-mode .header button {
+            background-color: #0c745a;
+        }
+        .dark-mode .highlight-cards {
+            background-color: #444;
+        }
+        .dark-mode .highlight-card {
+            background-color: #555;
+        }
+        .dark-mode .highlight-card h3 {
+            color: #eee;
+        }
+        .dark-mode .highlight-card p {
+            color: #ccc;
+        }
+        .dark-mode .card {
+            background-color: #555;
+            border-color: #666;
+        }
+
+        /* Media Queries */
+        @media (max-width: 576px) {
+            .header {
+                flex-direction: column;
+                align-items: center;
+                padding: 10px;
+            }
+            .header input {
+                width: calc(100% - 50px);
+                margin-right: 5px;
+                margin-bottom: 10px;
+            }
+            .header button {
+                width: 40px;
+                height: 40px;
+                margin-left: 5px;
+            }
+            .login-button {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+            .carousel {
+                height: 200px;
+            }
+            .carousel img {
+                width: 100%;
+                height: 200px;
+            }
+            .highlight-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            .highlight-card {
+                width: 80%;
+                margin-bottom: 20px;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            .card {
+                width: 100%;
+            }
+        }
+        .toggle-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <input type="text" placeholder="Buscá por marca, modelo, año, color...">
+            <button>🔍</button>
+            <button class="login-button" onclick="login()">Login</button>
+        </header>
+        <div class="carousel">
+            <div class="carousel-images">
+                <img src="https://via.placeholder.com/1920x300?text=Imagen+1" alt="Imagen 1">
+                <img src="https://via.placeholder.com/1920x300?text=Imagen+2" alt="Imagen 2">
+                <img src="https://via.placeholder.com/1920x300?text=Imagen+3" alt="Imagen 3">
+            </div>
+            <div class="carousel-buttons">
+                <button class="carousel-button" id="prev">&#10094;</button>
+                <button class="carousel-button" id="next">&#10095;</button>
+            </div>
+        </div>
+        <div class="highlight-cards">
+            <div class="highlight-card">
+                <h3>RÁPIDO Y GRATIS</h3>
+                <p>Vender</p>
+            </div>
+            <div class="highlight-card">
+                <h3>AUTOS Y CAMIONETAS</h3>
+                <p>Financiados</p>
+            </div>
+        </div>
+        <main class="main">
+            <h1>Concesionarias de Autos en Argentina</h1>
+            <div class="cards-grid">
+                <div class="card">
+                    <img src="https://via.placeholder.com/150" alt="Luxcar Usados">
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/150" alt="Bsas-Cars">
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/150" alt="RA Automotores">
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/150" alt="Autocity Usados">
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/150" alt="Maipu Usados">
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/150" alt="Segurola Automotores">
+                </div>
+            </div>
+        </main>
+    </div>
+    <button class="toggle-button" id="toggle-dark-mode">🌙</button>
+    <script>
+        const carouselImages = document.querySelector('.carousel-images');
+        const totalImages = carouselImages.querySelectorAll('img').length;
+        let currentIndex = 0;
+
+        document.getElementById('prev').addEventListener('click', () => {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : totalImages - 1;
+            carouselImages.style.transform = `translateX(-${currentIndex * 100 / totalImages}%)`;
+        });
+
+        document.getElementById('next').addEventListener('click', () => {
+            currentIndex = (currentIndex < totalImages - 1) ? currentIndex + 1 : 0;
+            carouselImages.style.transform = `translateX(-${currentIndex * 100 / totalImages}%)`;
+        });
+
+        const toggleButton = document.getElementById('toggle-dark-mode');
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            toggleButton.textContent = document.body.classList.contains('dark-mode') ? 'Modo Claro' : 'Modo Oscuro';
+        });
+
+        function login() {
+            window.location.href = 'index8.html';
+        }
+    </script>
+</body>
+</html>

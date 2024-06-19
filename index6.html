@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Sucursal de Autos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--body-bg);
+            color: var(--body-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: var(--container-bg);
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        h2 {
+            background-color: var(--h2-bg);
+            color: var(--h2-color);
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            margin-top: 20px;
+            color: var(--label-color);
+        }
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid var(--input-border);
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: var(--input-bg);
+            color: var(--input-color);
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        input[type="submit"] {
+            background-color: var(--button-bg);
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: var(--button-hover-bg);
+        }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--button-bg);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .theme-toggle:hover {
+            background-color: var(--button-hover-bg);
+        }
+        :root {
+            --body-bg: #FFFFFF;
+            --body-color: #1E1E1E;
+            --container-bg: #F4F4F4;
+            --h2-bg: #00A67E;
+            --h2-color: white;
+            --label-color: #1E1E1E;
+            --input-bg: #FFFFFF;
+            --input-color: #1E1E1E;
+            --input-border: #CCC;
+            --button-bg: #00A67E;
+            --button-hover-bg: #007B63;
+        }
+        .dark-mode {
+            --body-bg: #202123;
+            --body-color: #D9D9E3;
+            --container-bg: #2C2C2E;
+            --h2-bg: #00A67E;
+            --h2-color: white;
+            --label-color: #D9D9E3;
+            --input-bg: #3A3A3C;
+            --input-color: #D9D9E3;
+            --input-border: #555;
+            --button-bg: #00A67E;
+            --button-hover-bg: #007B63;
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">Cambiar Modo</button>
+    <div class="container">
+        <h2>Información de la Empresa Matriz</h2>
+        <form>
+            <label for="companyName">Nombre de la Empresa:</label>
+            <input type="text" id="companyName" name="companyName" required>
+
+            <label for="taxId">Número de Identificación Fiscal:</label>
+            <input type="text" id="taxId" name="taxId" required>
+
+            <label for="companyAddress">Dirección Principal:</label>
+            <input type="text" id="companyAddress" name="companyAddress" required>
+
+            <label for="companyPhone">Teléfono de Contacto:</label>
+            <input type="tel" id="companyPhone" name="companyPhone" required>
+
+            <label for="companyEmail">Correo Electrónico de Contacto:</label>
+            <input type="email" id="companyEmail" name="companyEmail" required>
+
+            <label for="companyWebsite">Página Web:</label>
+            <input type="text" id="companyWebsite" name="companyWebsite">
+
+            <label for="companyRep">Representante Legal:</label>
+            <input type="text" id="companyRep" name="companyRep" required>
+
+            <h2>Información de la Sucursal</h2>
+            <label for="branchName">Nombre de la Sucursal:</label>
+            <input type="text" id="branchName" name="branchName" required>
+
+            <label for="branchCode">Código de la Sucursal:</label>
+            <input type="text" id="branchCode" name="branchCode" required>
+
+            <label for="branchAddress">Dirección de la Sucursal:</label>
+            <input type="text" id="branchAddress" name="branchAddress" required>
+
+            <label for="branchCity">Ciudad:</label>
+            <input type="text" id="branchCity" name="branchCity" required>
+
+            <label for="branchState">Estado/Provincia:</label>
+            <input type="text" id="branchState" name="branchState" required>
+
+            <label for="branchPostalCode">Código Postal:</label>
+            <input type="text" id="branchPostalCode" name="branchPostalCode" required>
+
+            <label for="branchCountry">País:</label>
+            <input type="text" id="branchCountry" name="branchCountry" required>
+
+            <label for="branchPhone">Teléfono de la Sucursal:</label>
+            <input type="tel" id="branchPhone" name="branchPhone" required>
+
+            <label for="branchEmail">Correo Electrónico de la Sucursal:</label>
+            <input type="email" id="branchEmail" name="branchEmail" required>
+
+            <label for="branchHours">Horario de Atención:</label>
+            <input type="text" id="branchHours" name="branchHours" required>
+
+            <h2>Información de Contacto en la Sucursal</h2>
+            <label for="managerName">Nombre del Gerente:</label>
+            <input type="text" id="managerName" name="managerName" required>
+
+            <label for="managerPhone">Teléfono del Gerente:</label>
+            <input type="tel" id="managerPhone" name="managerPhone" required>
+
+            <label for="managerEmail">Correo Electrónico del Gerente:</label>
+            <input type="email" id="managerEmail" name="managerEmail" required>
+
+            <label for="salesRepName">Nombre del Encargado de Ventas:</label>
+            <input type="text" id="salesRepName" name="salesRepName">
+
+            <label for="salesRepPhone">Teléfono del Encargado de Ventas:</label>
+            <input type="tel" id="salesRepPhone" name="salesRepPhone">
+
+            <label for="salesRepEmail">Correo Electrónico del Encargado de Ventas:</label>
+            <input type="email" id="salesRepEmail" name="salesRepEmail">
+
+            <h2>Información Adicional</h2>
+            <label for="services">Servicios Ofrecidos:</label>
+            <textarea id="services" name="services" rows="4"></textarea>
+
+            <label for="numEmployees">Número de Empleados:</label>
+            <input type="text" id="numEmployees" name="numEmployees" required>
+
+            <label for="openingDate">Fecha de Apertura:</label>
+            <input type="text" id="openingDate" name="openingDate" required>
+
+            <label for="inventoryCapacity">Capacidad del Inventario:</label>
+            <input type="text" id="inventoryCapacity" name="inventoryCapacity" required>
+
+            <label for="carTypes">Tipos de Autos Disponibles:</label>
+            <textarea id="carTypes" name="carTypes" rows="2"></textarea>
+
+            <label for="certifications">Certificaciones y Licencias:</label>
+            <textarea id="certifications" name="certifications" rows="2"></textarea>
+
+            <label for="comments">Comentarios Adicionales:</label>
+            <textarea id="comments" name="comments" rows="4"></textarea>
+
+            <h2>Información Técnica y de Seguridad</h2>
+            <label for="managementSystem">Sistema de Gestión Usado:</label>
+            <input type="text" id="managementSystem" name="managementSystem">
+
+            <label for="safetyProtocols">Protocolos de Seguridad:</label>
+            <textarea id="safetyProtocols" name="safetyProtocols" rows="2"></textarea>
+
+            <label for="accessibility">Accesibilidad para Personas con Discapacidad:</label>
+            <textarea id="accessibility" name="accessibility" rows="2"></textarea>
+
+            <label for="parkingFacilities">Instalaciones de Estacionamiento:</label>
+            <textarea id="parkingFacilities" name="parkingFacilities" rows="2"></textarea>
+
+            <h2>Redes Sociales</h2>
+            <label for="facebook">Facebook:</label>
+            <input type="text" id="facebook" name="facebook">
+
+            <label for="twitter">Twitter:</label>
+            <input type="text" id="twitter" name="twitter">
+
+            <label for="instagram">Instagram:</label>
+            <input type="text" id="instagram" name="instagram">
+
+            <label for="linkedin">LinkedIn:</label>
+            <input type="text" id="linkedin" name="linkedin">
+
+            <h2>Documentación Requerida</h2>
+            <label for="license">Licencia de Funcionamiento:</label>
+            <input type="text" id="license" name="license" required>
+
+            <label for="inspection">Certificación de Inspección de Seguridad:</label>
+            <input type="text" id="inspection" name="inspection" required>
+
+            <label for="propertyProof">Prueba de Propiedad o Arrendamiento del Local:</label>
+            <input type="text" id="propertyProof" name="propertyProof" required>
+
+            <input type="submit" value="Registrar Sucursal">
+        </form>
+    </div>
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
+</body>
+</html>
